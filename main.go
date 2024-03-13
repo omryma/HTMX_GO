@@ -13,11 +13,7 @@ func main() {
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	// Home route
-	r.HandleFunc("/", serveHome).Methods("GET")
+	r.HandleFunc("/", serveIndex)
 
 	log.Fatal(http.ListenAndServe(":8080", r))
-}
-
-func serveHome(w http.ResponseWriter, r *http.Request) {
-	// We will use templ here to render our homepage
 }

@@ -1,0 +1,26 @@
+package components
+
+templ row(rowData) {
+    <tr id="datarow-{{.ID}}">
+        <td>{{.ID}}</td>
+        <td>{{title}}</td>
+    </tr>
+}
+
+templ table(configurationsData) {
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+            <tbody id="table-body">
+                for _, confData := range configurationsData {
+                    @row(confData)
+                }
+            </tbody>
+    </table>
+}

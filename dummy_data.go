@@ -9,7 +9,7 @@ type Configuration struct {
 	expression string
 }
 
-func init() {
+func initData() {
 	data = []Configuration{
 		{
 			ID:         "1234abc",
