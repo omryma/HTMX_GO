@@ -1,0 +1,20 @@
+package components
+
+import (
+    "HTMX_GO/models"
+    "strconv"
+    "strings"
+)
+
+func getIndex(name string) int {
+    split := strings.Split(name, "-")
+    number := split[len(split)-1]
+    index, _ := strconv.Atoi(number)
+    return index
+}
+
+templ Rows(configurationsData []models.Configuration) {
+    for _, confData := range configurationsData {
+        @Row(getIndex(confData.Name), confData)
+    }
+}

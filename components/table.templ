@@ -1,26 +1,25 @@
 package components
 
-templ row(rowData) {
-    <tr id="datarow-{{.ID}}">
-        <td>{{.ID}}</td>
-        <td>{{title}}</td>
-    </tr>
-}
+import (
+    "HTMX_GO/models"
+)
 
-templ table(configurationsData) {
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
-            </tr>
-        </thead>
-            <tbody id="table-body">
-                for _, confData := range configurationsData {
-                    @row(confData)
-                }
-            </tbody>
-    </table>
+templ table(configurationsData []models.Configuration) {
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mx-auto p-4">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-purple-100">
+                <tr>
+                    <th scope="col" class="py-3 px-6">Name</th>
+                    <th scope="col" class="py-3 px-6">AppID</th>
+                    <th scope="col" class="py-3 px-6">Expression</th>
+                    <th scope="col" class="py-3 px-6">Actions</th>
+                </tr>
+            </thead>
+                <tbody id="table-body">
+                    for i, confData := range configurationsData {
+                        @Row(i+1, confData)
+                    }
+                </tbody>
+        </table>
+    </div>
 }

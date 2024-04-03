@@ -1,0 +1,22 @@
+package components
+import (
+    "HTMX_GO/models"
+    "fmt"
+)
+
+templ Row(i int, rowData models.Configuration) {
+    <tr id={fmt.Sprintf("%d", i)} class="bg-white border-b"
+        if i%10==0 { hx-get={fmt.Sprintf("/conf?page=%d", i/10+1)} hx-trigger="revealed" hx-swap="afterend" }
+    >
+        <td class="py-4 px-6">{rowData.Name}</td>
+        <td class="py-4 px-6">{rowData.AppId}</td>
+        <td class="py-4 px-6">{rowData.Expression}</td>
+        <td class="py-4 px-6">
+            <button class="text-white bg-purple-500 hover:bg-purple-600 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 mb-2">Edit</button>
+            <button class="text-white bg-red-500 hover:bg-red-600 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 mb-2"
+            hx-delete={string(templ.SafeURL(fmt.Sprintf("/conf/%d", i)))} hx-target="closest tr" hx-swap="outerHTML swap:1s">
+                Delete
+            </button>
+        </td>
+    </tr>
+}
